@@ -46,16 +46,19 @@ public class CalculatorServlet extends HttpServlet {
     }
 
     private void dbRun() {
+        Object c = null;
         try{
-            String url = "jdbc:mysql://localhost/calc";
+            String url = "jdbc:mysql://127.0.0.1:3330/calc?craeteDatabaseifNotExist=true";
             String username = "root";
             String password = "root";
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            c =  Class.forName("com.mysql.jdbc.Driver");
+
             try (Connection conn = DriverManager.getConnection(url, username, password)){
                 System.out.println("connected");
             }
         }
         catch(Exception ex){
+            System.out.println("object: " + c);
             System.out.println("connection failed");
             System.out.println(ex);
         }
